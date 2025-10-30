@@ -1,0 +1,127 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f4f7;
+    color: #333;
+    padding: 20px;
+}
+
+.game-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 95%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.instructions-area {
+    margin-bottom: 25px;
+    line-height: 1.5;
+    font-size: 1.1em;
+}
+
+#startButton {
+    padding: 10px 25px;
+    font-size: 1.2em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.2s;
+}
+
+#startButton:disabled {
+    background-color: #ccc;
+    cursor: default;
+}
+
+/* --- Tracking Area --- */
+.tracking-area {
+    width: 500px;
+    height: 300px;
+    border: 3px solid #ccc;
+    position: relative; 
+    overflow: hidden;
+    margin: 20px auto;
+    cursor: none; /* Hide default cursor */
+    background-color: #f9f9f9;
+}
+
+.target-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    /* No initial background-color here, JS will set it */
+    transition: transform 0.01s linear; /* Smooth movement */
+}
+
+.player-cursor {
+    position: absolute;
+    width: 60px; 
+    height: 60px;
+    border: 5px solid #007bff; /* Default Blue ring */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Centers the element on the mouse coordinates */
+    pointer-events: none; /* Allows mouse events to pass through to the container */
+    transition: border-color 0.1s ease;
+}
+
+/* Visual Feedback Classes */
+.player-cursor.accurate {
+    border-color: #28a745; /* Green border when accurate */
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
+}
+.player-cursor.inaccurate {
+    border-color: #dc3545; /* Red border when inaccurate */
+}
+
+/* --- Stats and Progress --- */
+.stats-area {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.progress-bar-container {
+    width: 90%;
+    max-width: 500px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin: 15px auto;
+    height: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 100%; 
+    background-color: #007bff;
+    transition: width 0.9s linear; 
+}
+
+.feedback-message {
+    margin-top: 15px;
+    min-height: 20px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.hidden {
+    display: none;
+}

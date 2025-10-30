@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Control Protocol Launcher</title>
+    <link rel="stylesheet" href="launcher.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>Active Control Game Suite</h1>
+        <p>Select a game below to begin. </p>
+    </div>
+
+    <div class="main-content">
+        <div class="game-buttons">
+            <button class="game-btn" data-game-id="tapper">1. Typing Tapper</button>
+            <button class="game-btn" data-game-id="color">2. Color Match</button>
+            <button class="game-btn" data-game-id="tracking">3. Visual Tracking</button>
+            
+        </div>
+
+        <div class="game-frame-container">
+            <iframe id="gameFrame" src="about:blank" frameborder="0"></iframe>
+        </div>
+    </div>
+
+   
+
+    <script src="launcher.js"></script>
+</body>
+</html>

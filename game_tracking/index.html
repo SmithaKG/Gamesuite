@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Motor Control Task</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Predictable Tracking Task</h1>
+
+        <div class="instructions-area">
+            <p>Use your mouse to keep the large **Ring** centered over the small, **Colorful Target Dot**.</p>
+            <p>The ring will turn **GREEN** when you are accurate and earn points. Score is based on duration, not speed.</p>
+        </div>
+
+        <button id="startButton">START</button>
+
+        <div id="trackingArea" class="tracking-area hidden">
+            <div id="playerCursor" class="player-cursor"></div>
+            <div id="targetDot" class="target-dot"></div>
+        </div>
+        
+        <div class="stats-area">
+            <p>Time Left: <span id="timer">60</span>s</p>
+            <p>Score: <span id="score">0</span></p>
+        </div>
+
+        <div id="progressBarContainer" class="progress-bar-container hidden">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div id="message" class="feedback-message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

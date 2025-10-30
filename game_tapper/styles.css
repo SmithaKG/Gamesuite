@@ -1,0 +1,190 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #e8f4f8; /* Light background */
+    color: #333;
+    padding: 20px;
+}
+
+.game-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.instructions-area {
+    margin-bottom: 25px;
+    line-height: 1.5;
+    font-size: 1em;
+}
+
+.instructions-area strong {
+    color: #0056b3;
+}
+
+.game-button {
+    padding: 10px 25px;
+    font-size: 1.1em;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.game-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.stats-area {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+}
+
+.feedback-message {
+    margin-top: 20px;
+    min-height: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Ensure the game-area can receive focus for keyboard input */
+.game-area {
+    outline: none; 
+}
+3. JavaScript File (/game_tapper/script.js)
+This script contains the logic for press-and-release counting and sending the score back to the launcher.
+
+JavaScript
+
+document.addEventListener('DOMContentLoaded', () => {
+    const DURATION = 60; // Game duration in seconds
+    const TARGET_KEY = ' '; // Spacebar
+    
+    const startButton = document.getElementById('startButton');
+    const timerDisplay = document.getElementById('timer');
+    const scoreDisplay = document.getElementById('score');
+    const feedback = document.getElementById('feedback');
+    const gameArea = document.getElementById('game-area'); 
+    
+    let score = 0;
+    let timeLeft = DURATION;
+    let gameActive = false;
+    let timerInterval = null;
+    let isKeyDown = false; // Tracks if the key is currently held down
+
+    // Ensure the game area can receive focus for keyboard input
+    if (gameArea) {
+        gameArea.setAttribute('tabindex', 0); // Make it focusable
+    }
+    
+    function setFocus() {
+        if (gameArea) {
+            gameArea.focus();
+        }
+    }
+    
+    // --- Core Game Functions ---
+
+    function startGame() {
+        if (gameActive) return;
+
+        // Reset game state
+        score = 0;
+        timeLeft = DURATION;
+        gameActive = true;
+        scoreDisplay.textContent = score;
+        timerDisplay.textContent = timeLeft;
+        feedback.textContent = 'Press the Spacebar repeatedly!';
+
+        startButton.disabled = true;
+
+        // Ensure the game area can receive keyboard input
+        setFocus(); 
+
+        // Start timer
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            endGame();
+        }
+    }
+
+    function endGame() {
+        gameActive = false;
+        clearInterval(timerInterval);
+        startButton.disabled = false;
+        
+        // Final score message
+        feedback.textContent = `Time's Up! Final Score: ${score} taps.`;
+        
+        // *** CRITICAL STEP: Send the score to the parent window (the launcher) ***
+        window.parent.postMessage({
+            type: 'GAME_SCORE',
+            gameId: 'tapper', // Must match the folder name 'game_tapper'
+            score: score
+        }, '*'); 
+    }
+
+    // --- Key Event Handlers (Press-and-Release Logic) ---
+
+    // Handles key press DOWN (keydown)
+    window.addEventListener('keydown', (event) => {
+        if (!gameActive) return;
+        if (event.key !== TARGET_KEY) return;
+        
+        // Prevent default action (like page scrolling)
+        event.preventDefault(); 
+
+        // CRITICAL FIX: Only count the tap if the key was previously UP
+        if (!isKeyDown) {
+            score++;
+            scoreDisplay.textContent = score;
+            isKeyDown = true; // Key is now down
+            
+            // Visual feedback
+            feedback.textContent = `Tap: ${score}`; 
+        }
+    });
+
+    // Handles key release UP (keyup)
+    window.addEventListener('keyup', (event) => {
+        if (!gameActive) return;
+        if (event.key !== TARGET_KEY) return;
+        
+        // Allow the next tap to be counted
+        isKeyDown = false; 
+    });
+
+
+    // --- Initialization ---
+    startButton.addEventListener('click', startGame);
+});

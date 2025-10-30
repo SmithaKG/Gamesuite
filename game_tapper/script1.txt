@@ -1,0 +1,90 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById('startButton');
+    const timerDisplay = document.getElementById('timer');
+    const scoreDisplay = document.getElementById('score');
+    const messageDisplay = document.getElementById('message');
+    const progressBar = document.getElementById('progressBar');
+    
+    let score = 0;
+    let initialTime = 60; // Game duration in seconds
+    let timeLeft = initialTime;
+    let gameActive = false;
+    let timerInterval = null;
+
+    // --- Game Logic ---
+
+    function startGame() {
+        if (gameActive) return;
+
+        // Reset and start
+        score = 0;
+        timeLeft = initialTime;
+        gameActive = true;
+        
+        scoreDisplay.textContent = score;
+        timerDisplay.textContent = timeLeft;
+        messageDisplay.classList.add('hidden');
+        startButton.disabled = true; // Disable start button
+        
+        // Reset and show progress bar
+        progressBar.style.width = '100%'; 
+        progressBar.style.backgroundColor = '#007bff'; // Blue color
+
+        // Start the timer
+        timerInterval = setInterval(updateTimer, 1000);
+
+        // Listen for the spacebar press only when the game is active
+        document.addEventListener('keydown', handleKeyPress);
+    }
+
+    function updateTimer() {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        
+        // Update progress bar width
+        const progressPercentage = (timeLeft / initialTime) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+
+        // Change progress bar color towards end
+        if (timeLeft <= initialTime / 4) { // Last quarter of time
+            progressBar.style.backgroundColor = '#dc3545'; // Red
+        } else if (timeLeft <= initialTime / 2) { // Last half of time
+            progressBar.style.backgroundColor = '#ffc107'; // Yellow
+        }
+
+
+        if (timeLeft <= 0) {
+            endGame();
+        }
+    }
+
+    function handleKeyPress(event) {
+        // Only respond to the Spacebar key
+        if (event.code === 'Space' && gameActive) {
+            event.preventDefault(); // Prevents page scrolling/jumping
+            score++;
+            scoreDisplay.textContent = score;
+
+            // --- Visual Feedback for Tap ---
+            scoreDisplay.classList.add('tapped');
+            // Remove the class after a short delay to reset the animation
+            setTimeout(() => {
+                scoreDisplay.classList.remove('tapped');
+            }, 100); 
+        }
+    }
+
+    function endGame() {
+        gameActive = false;
+        clearInterval(timerInterval);
+        document.removeEventListener('keydown', handleKeyPress);
+        startButton.disabled = false;
+        
+        // Display final score
+        messageDisplay.textContent = `Time's Up! Final Score: ${score} taps.`;
+        messageDisplay.classList.remove('hidden');
+    }
+
+    // --- Event Listener ---
+    startButton.addEventListener('click', startGame);
+});

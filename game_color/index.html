@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Match Task - Control Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Color Match Task</h1>
+
+        <div class="instructions-area">
+            <p>Your goal is to quickly decide:</p>
+            <p>Are the two boxes the <strong>SAME</strong> color or <strong>DIFFERENT</strong>?</p>
+            <p class="start-hint">Click "START" to begin the 60-second challenge!</p>
+        </div>
+
+        <button id="startButton" class="game-button">START GAME</button>
+
+        <div id="game-area" class="game-area hidden"> 
+            <div class="color-display">
+                <div id="boxA" class="color-box"></div>
+                <div id="boxB" class="color-box"></div>
+            </div>
+
+            <div class="buttons">
+                <button id="sameButton" class="game-button response-button">SAME</button>
+                <button id="differentButton" class="game-button response-button">DIFFERENT</button>
+            </div>
+        </div>
+
+        <div class="stats-area">
+            <p>Time Left: <span id="timer">60</span>s</p>
+            <p>Score: <span id="score">0</span></p>
+        </div>
+
+        <div id="feedback" class="feedback-message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
