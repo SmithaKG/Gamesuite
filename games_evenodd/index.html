@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Even–Odd Race</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>🎲 Even–Odd Race</h1>
+    <h3>If even move forward by 1, if odd move backward by 1</h3>
+    <div class="timer">Time Left: <span id="timer">120</span> s</div>
+
+    <div class="track">
+      <div id="player" class="player"></div>
+      <div class="finish-line">🏁</div>
+    </div>
+
+    <div class="dice-area">
+      <div class="floor"></div>
+      <div id="dice" class="dice">
+        <div class="face front">1</div>
+        <div class="face back">2</div>
+        <div class="face right">3</div>
+        <div class="face left">4</div>
+        <div class="face top">5</div>
+        <div class="face bottom">6</div>
+      </div>
+    </div>
+
+    <button id="rollBtn">Roll Dice</button>
+
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
