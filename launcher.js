@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'tapper': return 'Typing Tapper';
             case 'color': return 'Color Match';
             case 'tracking': return 'Visual Tracking';
+            case 'evenodd': return 'Even Odd Dice';   
             default: return 'Unknown Game';
         }
     }
