@@ -7,20 +7,21 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- 🟢 START PAGE -->
+<!-- 🟢 START SCREEN -->
   <div id="start-screen" class="start-screen">
     <h1>🎯 Welcome to the Even–Odd Race!</h1>
     <p>
-      🎲 Roll the dice and test your luck!<br>
+      🎲 Roll the dice and test your luck!<br><br>
       👉 If you roll an <b>even</b> number, you move <b>forward by 1</b>.<br>
       👈 If you roll an <b>odd</b> number, you move <b>backward by 1</b>.<br><br>
       ⏱️ You have <b>120 seconds</b> to reach the finish line!<br><br>
+      Click below to begin.
     </p>
     <button id="startBtn" class="btn-start">Start Game</button>
   </div>
 
   <!-- 🕹️ MAIN GAME AREA (hidden at first) -->
-  <div class="game-container">
+  <div class="game-container" id="game-container" style="display:none;">
     <h1>🎲 Even–Odd Race</h1>
     <h3>If even move forward by 1, if odd move backward by 1</h3>
     <div class="timer">Time Left: <span id="timer">120</span> s</div>
@@ -49,6 +50,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
