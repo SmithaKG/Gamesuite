@@ -1,4 +1,19 @@
+// --- START PAGE LOGIC ---
 window.onload = () => {
+  const startBtn = document.getElementById("startBtn");
+  const startScreen = document.getElementById("start-screen");
+  const gameContainer = document.getElementById("game-container");
+
+  // When user clicks "Start Game"
+  startBtn.addEventListener("click", () => {
+    startScreen.style.display = "none";
+    gameContainer.style.display = "block";
+    initGame(); // 🔹 start the main game logic
+  });
+};
+
+// --- MAIN GAME LOGIC ---
+function initGame() {
   const totalSteps = 15;
   let position = 0;
   let timeLeft = 120;
@@ -21,7 +36,6 @@ window.onload = () => {
       if (timeLeft <= 0) endGame();
     }, 1000);
   }
-  startTimer();
 
   function endGame() {
     clearInterval(timer);
@@ -78,5 +92,5 @@ window.onload = () => {
   }
 
   rollBtn.addEventListener("click", rollDice);
-};
-
+  startTimer(); // start timer once game begins
+}
