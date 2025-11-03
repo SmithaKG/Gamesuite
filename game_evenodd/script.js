@@ -1,16 +1,20 @@
 // --- START PAGE LOGIC ---
-window.onload = () => {
+window.addEventListener("DOMContentLoaded", () => {
   const startBtn = document.getElementById("startBtn");
   const startScreen = document.getElementById("start-screen");
   const gameContainer = document.getElementById("game-container");
 
-  // When user clicks "Start Game"
-  startBtn.addEventListener("click", () => {
-    startScreen.style.display = "none";
-    gameContainer.style.display = "block";
-    initGame(); // 🔹 start the main game logic
-  });
-};
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      // hide start page and show game
+      startScreen.style.display = "none";
+      gameContainer.style.display = "block";
+
+      // now initialize the game
+      initGame();
+    });
+  }
+});
 
 // --- MAIN GAME LOGIC ---
 function initGame() {
@@ -94,3 +98,4 @@ function initGame() {
   rollBtn.addEventListener("click", rollDice);
   startTimer(); // start timer once game begins
 }
+
