@@ -4,6 +4,45 @@ body {
   display:flex;justify-content:center;align-items:center;
   height:100vh;margin:0;
 }
+/* === START SCREEN === */
+.start-screen {
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(135deg, #dff1ff, #ffffff);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 100px auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.start-screen h1 {
+  font-size: 2.5rem;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.start-screen p {
+  font-size: 1.2rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.btn-start {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-start:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
 
 .game-container{
   text-align:center;background:white;
@@ -60,3 +99,4 @@ button:hover{background:#4682b4;}
 #result{margin-top:15px;font-weight:bold;}
 
  
+
